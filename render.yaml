@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: cloudvault-storage
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATA_DIR
+        value: /tmp/cloudvault
+      - key: STORAGE_BACKEND
+        value: local
+      - key: COOKIE_SECURE
+        value: 'true'
+      - key: MAX_UPLOAD_MB
+        value: '25'
+      - key: STORAGE_QUOTA_MB
+        value: '500'
+# The free demo uses ephemeral local storage: files and accounts will be lost on restart.
+# To persist data, configure DATABASE_URL and an S3-compatible storage provider.
